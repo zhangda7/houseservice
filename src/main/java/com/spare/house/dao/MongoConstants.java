@@ -5,6 +5,12 @@ package com.spare.house.dao;
  */
 public class MongoConstants {
 
+    public final static String MONGO_TABLE_HOUSE_TREND = "house.trend";
+
+    public final static String MONGO_TABLE_ESTATE_DETAIL = "estate.detail";
+
     public final static String MONGO_FIELD_ESTATE_NAME = "name";
+
+    public final static String MONGO_FIELD_HOUSE_LINK = "houseLink";
 
 }

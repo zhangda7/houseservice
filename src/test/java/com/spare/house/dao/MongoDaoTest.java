@@ -1,6 +1,7 @@
 package com.spare.house.dao;
 
 import com.spare.house.model.Estate;
+import com.spare.house.model.PageQuery;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,8 @@ public class MongoDaoTest {
 
     @Before
     public void before() {
-        mongoDao = new MongoDao("127.0.0.1", 27017, "lianjia");
+        mongoDao = new MongoDao();
+//        mongoDao.setHost();
         mongoDao.init();
     }
 
@@ -21,7 +23,7 @@ public class MongoDaoTest {
     public void testQueryEstate() {
         Estate estate = new Estate();
         estate.setName("万科提香别墅");
-        mongoDao.queryEstate(estate);
+        mongoDao.queryEstate(estate, new PageQuery());
     }
 
 }
