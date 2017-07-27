@@ -19,7 +19,7 @@ public class HouseTrendController {
     @Autowired
     HouseTrendService houseTrendService;
 
-    @GetMapping("house/trend")
+    @GetMapping("/rest/v1/house/trend")
     public String query() {
         List<HouseTrend> houseTrends = houseTrendService.list(null, new PageQuery());
         return JSON.toJSONString(houseTrends);

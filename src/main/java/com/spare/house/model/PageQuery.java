@@ -10,7 +10,7 @@ public class PageQuery {
 
     public PageQuery() {
         this.page = 1;
-        this.perPageCount = 10;
+        this.perPageCount = 100;
     }
 
     private int page;

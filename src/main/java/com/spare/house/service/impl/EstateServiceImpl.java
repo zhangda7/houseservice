@@ -1,5 +1,6 @@
 package com.spare.house.service.impl;
 
+import com.spare.house.dao.EstateMongoDao;
 import com.spare.house.dao.MongoDao;
 import com.spare.house.model.Estate;
 import com.spare.house.model.PageQuery;
@@ -16,11 +17,16 @@ import java.util.List;
 public class EstateServiceImpl implements EstateService {
 
     @Autowired
-    MongoDao mongoDao;
+    EstateMongoDao estateMongoDao;
 
     @Override
     public List<Estate> list(Estate where, PageQuery pageQuery) {
-        mongoDao.queryEstate(where, pageQuery);
+//        estateMongoDao.queryByName(where, pageQuery);
         return null;
+    }
+
+    @Override
+    public List<Estate> listByName(String estateName) {
+        return estateMongoDao.queryByName(estateName, new PageQuery());
     }
 }

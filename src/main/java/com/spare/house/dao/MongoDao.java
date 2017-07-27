@@ -62,27 +62,6 @@ public class MongoDao {
 
     }
 
-    public List<Estate>queryEstate(Estate where, PageQuery pageQuery) {
-        MongoCollection<Document> collection = mongoDatabase.getCollection("estate.detail");
-        try {
-            FindIterable<Document> iterable = collection
-                    .find(Filters.eq(MongoConstants.MONGO_FIELD_ESTATE_NAME, where.getName())).
-                            skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount());
-            if(iterable == null) {
-                logger.info("Can not find estate for {}", where.getName());
-                return null;
-            }
-            iterable.forEach((Block<Document>) document -> {
-                logger.info("Find {}", document);
-            });
-
-//            logger.info("Find estate {} for {}", document, where.getName());
-        } catch (Exception e) {
-            logger.error("ERROR on query estate ", e);
-        }
-        return null;
-    }
-
     public List<HouseTrend> queryHouseTrend(String houseLink, PageQuery pageQuery) {
         MongoCollection<Document> collection = mongoDatabase.getCollection("house.result");
         try {
@@ -133,5 +112,9 @@ public class MongoDao {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public MongoDatabase getMongoDatabase() {
+        return mongoDatabase;
     }
 }

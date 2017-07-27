@@ -2,6 +2,7 @@ package com.spare.house.util;
 
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.spare.house.model.Estate;
 import com.spare.house.model.HouseTrend;
 import org.bson.Document;
 import org.springframework.util.CollectionUtils;
@@ -35,10 +36,26 @@ public class ModelConveter {
                     }
                 }
             }
-//            document.get
             houseTrends.add(houseTrend);
         });
         return houseTrends;
+    }
+
+    public static List<Estate> convertToEstate(FindIterable<Document> iterable) {
+        List<Estate> estateList = new ArrayList<>();
+        if(iterable == null) {
+            return estateList;
+        }
+        iterable.forEach((Block<Document>) document -> {
+            Estate estate = new Estate();
+            estate.setName(document.getString("name"));
+            estate.setDistrict(document.getString("district"));
+            estate.setAddress(document.getString("address"));
+            estate.setLianjiaId(document.getString("lianjiaId"));
+            estate.setLink(document.getString("houseLink"));
+            estateList.add(estate);
+        });
+        return estateList;
     }
 
 }

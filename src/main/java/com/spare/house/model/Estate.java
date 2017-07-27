@@ -14,7 +14,7 @@ public class Estate {
 
     private String district;
 
-    private String lianjieId;
+    private String lianjiaId;
 
     private String link;
 }

@@ -12,4 +12,11 @@ public interface EstateService {
 
     List<Estate> list(Estate where, PageQuery pageQuery);
 
+    /**
+     * List by name, default max count 50
+     * @param estateName
+     * @return
+     */
+    List<Estate> listByName(String estateName);
+
 }
