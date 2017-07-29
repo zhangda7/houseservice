@@ -13,4 +13,7 @@ public class MongoConstants {
 
     public final static String MONGO_FIELD_HOUSE_LINK = "houseLink";
 
+    public final static String MONGO_FIELD_DISTRICT = "district";
+
+
 }

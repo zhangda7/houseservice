@@ -19,4 +19,11 @@ public interface EstateService {
      */
     List<Estate> listByName(String estateName);
 
+    /**
+     * List by district, default max count 50
+     * @param district
+     * @return
+     */
+    List<Estate> listByDistrict(String district, PageQuery pageQuery);
+
 }

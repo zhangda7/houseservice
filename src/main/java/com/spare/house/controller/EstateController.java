@@ -25,23 +25,26 @@ public class EstateController {
 
     @GetMapping("/rest/v1/estate/listByDistrict")
     public RestfulPage listByDistrict(@RequestParam("district") String district,
-                       @RequestParam("startPage") Integer startPage,
+                       @RequestParam("page") Integer page,
                        @RequestParam("pageCount") Integer pageCount) {
 
-        if(district == null || startPage == null || pageCount == null) {
+        if(district == null || page == null || pageCount == null) {
             RestfulPage restfulPage = new RestfulPage();
             restfulPage.setCode(301);
             restfulPage.setMsg("Param error");
             return restfulPage;
         }
 
-        Estate estate = new Estate();
-        estate.setDistrict(district);
         PageQuery pageQuery = new PageQuery();
-        pageQuery.setPage(startPage);
+        pageQuery.setPage(page);
         pageQuery.setPerPageCount(pageCount);
 
-        return doList(estate, pageQuery);
+        List<Estate> estateList = estateService.listByDistrict(district, pageQuery);
+        RestfulPage restfulPage = new RestfulPage();
+        restfulPage.setCode(HouseServiceConstans.REST_CODE_OK);
+        restfulPage.setData(JSON.toJSONString(estateList));
+        restfulPage.setSize(estateList.size());
+        return restfulPage;
     }
 
     private RestfulPage doList(Estate estate, PageQuery pageQuery) {
@@ -65,6 +68,7 @@ public class EstateController {
         RestfulPage restfulPage = new RestfulPage();
         restfulPage.setCode(HouseServiceConstans.REST_CODE_OK);
         restfulPage.setData(JSON.toJSONString(estateList));
+        restfulPage.setSize(estateList.size());
         return restfulPage;
     }
 

@@ -35,9 +35,15 @@ public class EstateControllerTest {
 
     @Test
     public void testListByDistrict() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/rest/v1/estate/listByDistrict?district=123&startPage=1&pageCount=100").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/rest/v1/estate/listByDistrict?district=123&page=1&pageCount=100").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("{\"code\":200,\"msg\":null,\"data\":\"null\",\"size\":0}")));
+    }
+
+    @Test
+    public void testListByDistrictHasValue() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/rest/v1/estate/listByDistrict?district=浦东&page=1&pageCount=10").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test

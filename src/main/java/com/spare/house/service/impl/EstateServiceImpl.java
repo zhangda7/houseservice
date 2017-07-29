@@ -29,4 +29,9 @@ public class EstateServiceImpl implements EstateService {
     public List<Estate> listByName(String estateName) {
         return estateMongoDao.queryByName(estateName, new PageQuery());
     }
+
+    @Override
+    public List<Estate> listByDistrict(String district, PageQuery pageQuery) {
+        return estateMongoDao.queryByDistrict(district, pageQuery);
+    }
 }

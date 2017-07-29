@@ -48,4 +48,21 @@ public class EstateMongoDao {
         return new ArrayList<>();
     }
 
+    public List<Estate> queryByDistrict(String district, PageQuery pageQuery) {
+        MongoCollection<Document> collection = mongoDao.getMongoDatabase().getCollection("estate.detail");
+        try {
+            FindIterable<Document> iterable = collection
+                    .find(Filters.regex(MongoConstants.MONGO_FIELD_DISTRICT, ".*" + district + ".*")).
+                            skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount());
+            if(iterable == null) {
+                logger.info("Can not find estate for {}", district);
+                return null;
+            }
+            return ModelConveter.convertToEstate(iterable);
+        } catch (Exception e) {
+            logger.error("ERROR on query estate ", e);
+        }
+        return new ArrayList<>();
+    }
+
 }
