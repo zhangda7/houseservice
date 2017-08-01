@@ -3,8 +3,11 @@ package com.spare.house.util;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.spare.house.model.Estate;
+import com.spare.house.model.House;
 import com.spare.house.model.HouseTrend;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -14,6 +17,8 @@ import java.util.List;
  * Created by dada on 2017/7/25.
  */
 public class ModelConveter {
+
+    private static Logger logger = LoggerFactory.getLogger(ModelConveter.class);
 
     public static List<HouseTrend> convertToHouseTrend(FindIterable<Document> iterable) {
         List<HouseTrend> houseTrends = new ArrayList<>();
@@ -56,6 +61,33 @@ public class ModelConveter {
             estateList.add(estate);
         });
         return estateList;
+    }
+
+    public static List<House> convertToHouse(FindIterable<Document> iterable) {
+        List<House> houseList = new ArrayList<>();
+        if(iterable == null) {
+            return houseList;
+        }
+        iterable.forEach((Block<Document>) document -> {
+            House house = new House();
+            house.setTitle(document.getString("title"));
+            house.setLink(document.getString("link"));
+            house.setEstateLianjiaId(document.getString("estateLianjiaId"));
+            house.setEstateName(document.getString("estateName"));
+            //FIXME time convert problem
+//            house.setGmtCreated(document.getDate("gmtCreated"));
+            try {
+                house.setPrice(Double.parseDouble(document.getString("price")));
+            } catch (NumberFormatException e) {
+                logger.error("Price of house {} {} is error {}", document.getString("_id"), house.getTitle(), document.getString("price"));
+            }
+            house.setCity(document.getString("city"));
+            house.setHouseType(document.getString("houseType"));
+            house.setArea(document.getString("eara"));
+            house.setFloor(document.getString("floor"));
+            houseList.add(house);
+        });
+        return houseList;
     }
 
 }
