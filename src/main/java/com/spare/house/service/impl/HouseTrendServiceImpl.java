@@ -1,5 +1,6 @@
 package com.spare.house.service.impl;
 
+import com.spare.house.dao.HouseTrendMongoDao;
 import com.spare.house.dao.MongoDao;
 import com.spare.house.model.HouseTrend;
 import com.spare.house.model.PageQuery;
@@ -16,11 +17,11 @@ import java.util.List;
 public class HouseTrendServiceImpl implements HouseTrendService {
 
     @Autowired
-    MongoDao mongoDao;
+    HouseTrendMongoDao houseTrendMongoDao;
 
     @Override
-    public List<HouseTrend> list(String houseLink, PageQuery pageQuery) {
-        return mongoDao.queryHouseTrend(houseLink, pageQuery);
+    public List<HouseTrend> list(HouseTrend where, PageQuery pageQuery) {
+        return houseTrendMongoDao.queryByHouseId(where.getHouseId(), pageQuery);
     }
 
 }

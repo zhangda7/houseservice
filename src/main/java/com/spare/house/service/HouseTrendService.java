@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface HouseTrendService {
 
-    List<HouseTrend> list(String houseLink, PageQuery pageQuery);
+    List<HouseTrend> list(HouseTrend where, PageQuery pageQuery);
 
 }

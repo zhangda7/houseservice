@@ -1,5 +1,7 @@
 package com.spare.house.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
  * Created by dada on 2017/6/30.
  * House Trend
  */
+@Data
 public class HouseTrend implements Serializable {
 
     private long serialVersionUID = 1L;
@@ -14,6 +17,8 @@ public class HouseTrend implements Serializable {
     private String title;
 
     private String link;
+
+    private String houseId;
 
     private List<Trend> trendList;
 
@@ -49,27 +54,4 @@ public class HouseTrend implements Serializable {
         }
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public List<Trend> getTrendList() {
-        return trendList;
-    }
-
-    public void setTrendList(List<Trend> trendList) {
-        this.trendList = trendList;
-    }
 }

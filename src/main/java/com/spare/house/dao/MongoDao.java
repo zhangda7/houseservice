@@ -62,34 +62,6 @@ public class MongoDao {
 
     }
 
-    public List<HouseTrend> queryHouseTrend(String houseLink, PageQuery pageQuery) {
-        MongoCollection<Document> collection = mongoDatabase.getCollection("house.result");
-        try {
-            FindIterable<Document> iterable;
-            if(houseLink == null) {
-                iterable = collection
-                        .find().skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount());
-            } else {
-            iterable = collection
-                    .find(Filters.eq(MongoConstants.MONGO_FIELD_HOUSE_LINK, houseLink)).
-                            skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount());
-            }
-            if(iterable == null) {
-                logger.info("Can not find estate for {}", houseLink);
-                return null;
-            }
-//            iterable.forEach((Block<Document>) document -> {
-//                logger.info("Find {}", document);
-//            });
-            return ModelConveter.convertToHouseTrend(iterable);
-
-//            logger.info("Find estate {} for {}", document, where.getName());
-        } catch (Exception e) {
-            logger.error("ERROR on query estate ", e);
-        }
-        return null;
-    }
-
     public String getUri() {
         return uri;
     }
