@@ -17,4 +17,6 @@ public class Estate {
     private String lianjiaId;
 
     private String link;
+
+    private Double price;
 }

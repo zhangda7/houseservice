@@ -40,6 +40,7 @@ public class EstateController {
         pageQuery.setPerPageCount(pageCount);
 
         List<Estate> estateList = estateService.listByDistrict(district, pageQuery);
+
         RestfulPage restfulPage = new RestfulPage();
         restfulPage.setCode(HouseServiceConstans.REST_CODE_OK);
         restfulPage.setData(JSON.toJSONString(estateList));

@@ -27,11 +27,15 @@ public class EstateServiceImpl implements EstateService {
 
     @Override
     public List<Estate> listByName(String estateName) {
-        return estateMongoDao.queryByName(estateName, new PageQuery());
+        List<Estate> estateList = estateMongoDao.queryByName(estateName, new PageQuery());
+        estateMongoDao.fillLatestPrice(estateList);
+        return estateList;
     }
 
     @Override
     public List<Estate> listByDistrict(String district, PageQuery pageQuery) {
-        return estateMongoDao.queryByDistrict(district, pageQuery);
+        List<Estate> estateList = estateMongoDao.queryByDistrict(district, pageQuery);
+        estateMongoDao.fillLatestPrice(estateList);
+        return estateList;
     }
 }

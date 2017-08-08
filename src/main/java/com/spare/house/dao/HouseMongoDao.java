@@ -34,7 +34,7 @@ public class HouseMongoDao {
             pageQuery = new PageQuery();
         }
 
-        MongoCollection<Document> collection = mongoDao.getMongoDatabase().getCollection("house.detail");
+        MongoCollection<Document> collection = mongoDao.getMongoDatabase().getCollection("house.current");
         try {
             List<Bson> filters = new ArrayList<>();
             if(house.getEstateName() != null) {
@@ -46,7 +46,7 @@ public class HouseMongoDao {
 
             FindIterable<Document> iterable = collection
                     .find(Filters.and(filters))
-                            .skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount());
+                            .skip(pageQuery.getSkip()).limit(pageQuery.getPerPageCount()).sort(Filters.eq("_id", -1));
             if(iterable == null) {
                 logger.info("Can not find house for {}", house);
                 return null;

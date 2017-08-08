@@ -5,6 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.spare.house.model.Estate;
 import com.spare.house.model.House;
 import com.spare.house.model.HouseTrend;
+import org.apache.el.lang.ELArithmetic;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,13 +78,18 @@ public class ModelConveter {
             //FIXME time convert problem
 //            house.setGmtCreated(document.getDate("gmtCreated"));
             try {
-                house.setPrice(Double.parseDouble(document.getString("price")));
+                Object priceObj = document.get("price");
+                if(priceObj instanceof String) {
+                    house.setPrice(Double.valueOf(document.getString("price")));
+                } else if(priceObj instanceof Double) {
+                    house.setPrice((Double) priceObj);
+                }
             } catch (NumberFormatException e) {
                 logger.error("Price of house {} {} is error {}", document.getString("_id"), house.getTitle(), document.getString("price"));
             }
             house.setCity(document.getString("city"));
             house.setHouseType(document.getString("houseType"));
-            house.setArea(document.getString("eara"));
+            house.setArea(document.getString("area"));
             house.setFloor(document.getString("floor"));
             houseList.add(house);
         });
