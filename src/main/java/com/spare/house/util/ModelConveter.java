@@ -36,7 +36,7 @@ public class ModelConveter {
                 if(! CollectionUtils.isEmpty(trends)) {
                     for (Document docTrend : trends) {
                         HouseTrend.Trend trend = houseTrend.new Trend();
-                        trend.setDate(docTrend.getString("date"));
+                        trend.setDate(docTrend.getDate("date"));
                         trend.setPrice(docTrend.getString("price"));
                         houseTrend.getTrendList().add(trend);
                     }

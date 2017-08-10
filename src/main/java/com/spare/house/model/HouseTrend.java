@@ -3,6 +3,7 @@ package com.spare.house.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,15 +26,17 @@ public class HouseTrend implements Serializable {
     public class Trend implements Serializable {
         private long serialVersionUID = 1L;
 
-        private String date;
+        private Date date;
 
         private String price;
 
-        public String getDate() {
+        private String dateStr;
+
+        public Date getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(Date date) {
             this.date = date;
         }
 
@@ -43,6 +46,14 @@ public class HouseTrend implements Serializable {
 
         public void setPrice(String price) {
             this.price = price;
+        }
+
+        public String getDateStr() {
+            return dateStr;
+        }
+
+        public void setDateStr(String dateStr) {
+            this.dateStr = dateStr;
         }
 
         @Override
