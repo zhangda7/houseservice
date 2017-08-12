@@ -1,5 +1,6 @@
 package com.spare.house.model;
 
+import com.spare.house.service.impl.HouseTrendServiceImpl;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,15 +12,15 @@ import java.util.List;
  * House Trend
  */
 @Data
-public class HouseTrend implements Serializable {
+public class HouseTrend extends House implements Serializable {
 
     private long serialVersionUID = 1L;
 
-    private String title;
-
-    private String link;
-
-    private String houseId;
+//    private String title;
+//
+//    private String link;
+//
+//    private String houseId;
 
     private List<Trend> trendList;
 

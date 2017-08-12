@@ -40,7 +40,7 @@ public class HouseController {
 
         House where = new House();
         where.setEstateName(estateName);
-        where.setHouseLianjiaId(houseId);
+        where.setHouseId(houseId);
 
         List<House> houseList = houseMongoDao.list(where, pageQuery);
         restfulPage.setCode(200);

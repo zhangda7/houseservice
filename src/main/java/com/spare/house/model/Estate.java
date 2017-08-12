@@ -19,4 +19,6 @@ public class Estate {
     private String link;
 
     private Double price;
+
+    private String year;
 }

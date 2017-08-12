@@ -40,8 +40,8 @@ public class HouseMongoDao {
             if(house.getEstateName() != null) {
                 filters.add(Filters.eq(MongoConstants.MONGO_FILED_HOUSE_ESTATE_NAME, house.getEstateName()));
             }
-            if(house.getHouseLianjiaId() != null) {
-                filters.add(Filters.eq(MongoConstants.MONGO_FIELD_HOUSE_LIANJIA_ID, house.getHouseLianjiaId()));
+            if(house.getHouseId() != null) {
+                filters.add(Filters.regex("link", ".*" + house.getHouseId() + ".*"));
             }
 
             FindIterable<Document> iterable = collection

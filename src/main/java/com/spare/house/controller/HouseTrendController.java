@@ -47,4 +47,25 @@ public class HouseTrendController {
         return restfulPage;
     }
 
+    @GetMapping("/rest/v1/house/trendDetail")
+    public RestfulPage queryWithHouseDetail(@RequestParam("houseId") String houseId) {
+        logger.info("Receive request {}", houseId);
+
+        RestfulPage restfulPage = new RestfulPage();
+        if(houseId == null) {
+            restfulPage.setCode(301);
+            restfulPage.setMsg("Param estateName and houseId can not both null");
+            return restfulPage;
+        }
+
+        HouseTrend where = new HouseTrend();
+        where.setHouseId(houseId);
+        List<HouseTrend> houseTrends = houseTrendService.listWithDetail(where, new PageQuery());
+        restfulPage.setCode(200);
+        restfulPage.setSize(houseTrends.size());
+        restfulPage.setData(JSON.toJSONString(houseTrends));
+
+        return restfulPage;
+    }
+
 }

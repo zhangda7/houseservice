@@ -59,6 +59,8 @@ public class ModelConveter {
             estate.setAddress(document.getString("address"));
             estate.setLianjiaId(document.getString("lianjiaId"));
             estate.setLink(document.getString("houseLink"));
+            estate.setYear(document.getString("year"));
+            estate.setYear(estate.getYear().replaceAll(" ", "").replaceAll("\n", "").replaceAll("\t", ""));
             estateList.add(estate);
         });
         return estateList;
@@ -89,7 +91,17 @@ public class ModelConveter {
             }
             house.setCity(document.getString("city"));
             house.setHouseType(document.getString("houseType"));
-            house.setArea(document.getString("area"));
+            Object areaObj = document.get("area");
+            if(areaObj == null) {
+                house.setArea(1.0);
+            } else {
+                if(areaObj instanceof String && ((String)areaObj).contains("平")) {
+                    String areaStr = (String) areaObj;
+                    house.setArea(Double.parseDouble(areaStr.substring(0, areaStr.length() - 1)));
+                } else if(areaObj instanceof Double) {
+                    house.setArea((Double) areaObj);
+                }
+            }
             house.setFloor(document.getString("floor"));
             houseList.add(house);
         });

@@ -12,4 +12,7 @@ public interface HouseTrendService {
 
     List<HouseTrend> list(HouseTrend where, PageQuery pageQuery);
 
+    List<HouseTrend> listWithDetail(HouseTrend where, PageQuery pageQuery);
+
+
 }
